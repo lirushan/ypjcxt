@@ -92,9 +92,10 @@ export default {
     },
     // 绘制粒子
     drawDot (i) {
-      let radiusStr = '1,2,3'
-      let radiusArr = radiusStr.split(',') // 粒子半径
-      let radius = radiusArr[Math.round(Math.random() * (radiusArr.length - 1))]
+      // let radiusStr = '1,2,3'
+      // let radiusArr = radiusStr.split(',') // 粒子半径
+      // let radius = radiusArr[Math.round(Math.random() * (radiusArr.length - 1))]
+      let radius = 2
       let color = this.colorToRGB('#DDF', '0.5') // 粒子颜色
       this.ctx1.save()
       this.ctx1.translate(i.x - 0.5, i.y - 0.5)

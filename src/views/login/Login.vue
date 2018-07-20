@@ -1,5 +1,17 @@
 <template>
-  <div></div>
+  <div id="Login">
+    <div style="width: 22%; height: 52%; left:0; top:0; right:0; bottom: 0; margin: auto;position: absolute; background-color: #FFF;border-radius: 5px ">
+      <header style="text-align: center; font-weight: bold; font-size: 18px; letter-spacing: 1px; padding: 5% 0; border-bottom: 1px solid silver;">XXXXXXXXXXX项目管理平台</header>
+      <section>
+        <form>
+          <div style="padding: 10px 10px; ">
+            <i class="fa fa-user-circle-o"></i>
+            <input placeholder="请输入用户名">
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
 </template>
 
 <script>

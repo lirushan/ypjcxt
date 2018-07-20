@@ -56,7 +56,7 @@ export default {
       // 粒子移动速度
       let q = 2 * Math.random() - 1
       let d = 2 * Math.random() - 1
-      this.t.push({x: h, y: g, xa: q, ya: d, max: 6000})
+      this.t.push({x: h, y: g, xa: q, ya: d, max: 10000})
     }
     setTimeout(() => { this.b() }, 100)
   },
@@ -77,7 +77,7 @@ export default {
         z: this.o(v, 'zIndex', -1),
         o: this.o(v, 'opacity', 0.9),
         c: this.o(v, 'color', '255,255,230'),
-        n: this.o(v, 'count', 99)
+        n: this.o(v, 'count', 200)
       }
     },
     // 绘制粒子

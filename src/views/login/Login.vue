@@ -10,10 +10,11 @@ export default {
     this.n = 0
     this.t = []
     this.ctx1 = ''
+    // 鼠标连线参数
     this.f = {
       k: 0,
       y: 0,
-      max: 2000
+      max: 20000
     }
     this.s = {}
   },
@@ -30,8 +31,14 @@ export default {
     this.u.style.cssText = 'position:fixed;top:0;left:0;z-index:' + this.s.z + ';opacity:' + this.s.o
     // 在body标签里添加canvas动画
     this.j('body')[0].appendChild(this.u)
+    this.j('body')[0].style.backgroundColor = '#2D58E3'
     this.k()
-    window.onresize = this.k
+    // window.onresize = this.k()
+    window.onresize = () => {
+      return (() => {
+        this.k()
+      })()
+    }
     // 鼠标事件
     window.onmousemove = function (i) {
       i = i || window.event
@@ -69,42 +76,21 @@ export default {
         l: w,
         z: this.o(v, 'zIndex', -1),
         o: this.o(v, 'opacity', 0.9),
-        c: this.o(v, 'color', '0,0,255'),
-        n: this.o(v, 'count', 199)
-      }
-    },
-    // 颜色16进制转RGBA
-    colorToRGB (color, alpha) {
-      if (typeof color === 'string' && color[0] === '#') {
-        color = window.parseInt(color.slice(1), 16)
-      }
-      alpha = (alpha === undefined) ? 1 : alpha
-      // 解析
-      let r = color >> 16 & 0xff
-      let g = color >> 8 & 0xff
-      let b = color >> 4 & 0xff
-      let a = (alpha < 0) ? 0 : ((alpha > 1) ? 1 : alpha)
-      if (a === 1) {
-        return 'rgb(' + r + ',' + g + ',' + b + ')'
-      } else {
-        return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')'
+        c: this.o(v, 'color', '255,255,230'),
+        n: this.o(v, 'count', 99)
       }
     },
     // 绘制粒子
     drawDot (i) {
-      // let radiusStr = '1,2,3'
-      // let radiusArr = radiusStr.split(',') // 粒子半径
-      // let radius = radiusArr[Math.round(Math.random() * (radiusArr.length - 1))]
       let radius = 2
-      let color = this.colorToRGB('#DDF', '0.5') // 粒子颜色
       this.ctx1.save()
       this.ctx1.translate(i.x - 0.5, i.y - 0.5)
       // 旋转
       this.ctx1.rotate(0)
       // 比例
       this.ctx1.scale(1, 1)
-      this.ctx1.fillStyle = color
-      this.ctx1.strokeStyle = color
+      this.ctx1.fillStyle = 'rgba(' + this.s.c + ')'
+      this.ctx1.strokeStyle = 'rgba(' + this.s.c + ')'
       this.ctx1.beginPath()
       this.ctx1.arc(0, 0, radius, 0, Math.PI * 2, false)
       this.ctx1.closePath()
@@ -115,6 +101,7 @@ export default {
     k () {
       this.r = this.u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
       this.n = this.u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+      console.log(this.r)
     },
     // 业务逻辑
     b () {
@@ -140,12 +127,17 @@ export default {
         for (v = 0; v < w.length; v++) {
           x = w[v]
           if (i !== x && x.x !== null && x.y !== null) {
+            // 两粒子x轴的距离
             B = i.x - x.x
+            // 两粒子y轴的距离
             z = i.y - x.y
+            // 计算两个粒子之间的最短距离 y
             y = B * B + z * z
             // y < x.max && (x === this.f && y >= (x.max / 2) && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, this.ctx1.beginPath(), this.ctx1.lineWidth = A / 2, this.ctx1.strokeStyle = 'rgba(' + this.s.c + ',' + (A + 0.2) + ')', this.ctx1.moveTo(i.x, i.y), this.ctx1.lineTo(x.x, x.y), this.ctx1.stroke())
             // 上面注释掉的代码翻译后的逻辑
+            // 如果两粒子的距离小于6000就连线
             if (y < x.max) {
+              // 鼠标控制粒子的引力大小
               if (x === this.f && y > (x.max / 2)) {
                 i.x -= 0.03 * B
                 i.y -= 0.03 * z

@@ -1,12 +1,30 @@
 <template>
   <div id="Login">
-    <div style="width: 22%; height: 52%; left:0; top:0; right:0; bottom: 0; margin: auto;position: absolute; background-color: #FFF;border-radius: 5px ">
-      <header style="text-align: center; font-weight: bold; font-size: 18px; letter-spacing: 1px; padding: 5% 0; border-bottom: 1px solid silver;">XXXXXXXXXXX项目管理平台</header>
+    <div
+      style="width: 22%; height: 52%; left:0; top:0; right:0; bottom: 0; margin: auto;position: absolute; background-color: #FFF;border-radius: 5px; opacity: 0.95 ">
+      <header
+        style="text-align: center; font-weight: bold; font-size: 18px; letter-spacing: 1px; padding: 5% 0; border-bottom: 1px solid gainsboro;">
+        XXXXXXXXXXX项目管理平台
+      </header>
       <section>
-        <form>
-          <div style="padding: 10px 10px; ">
-            <i class="fa fa-user-circle-o"></i>
-            <input placeholder="请输入用户名">
+        <form style="padding: 20px 20px;" class="test">
+          <div class="margin-bottom-20">
+            <el-input placeholder="请输入用户名">
+              <template slot="prepend"><i class="fa fa-user-circle-o"></i></template>
+            </el-input>
+          </div>
+          <div class="margin-bottom-20">
+            <el-input placeholder="请输入密码">
+              <template slot="prepend"><i class="fa fa-keyboard-o"></i></template>
+            </el-input>
+          </div>
+          <div class="margin-bottom-20">
+            <el-input placeholder="请输入验证码">
+              <template slot="prepend"><i class="fa fa-key"></i></template>
+            </el-input>
+          </div>
+          <div class="margin-bottom-20">
+            <el-button type="primary" style="width: 100%;">登录</el-button>
           </div>
         </form>
       </section>
@@ -88,7 +106,7 @@ export default {
         l: w,
         z: this.o(v, 'zIndex', -1),
         o: this.o(v, 'opacity', 0.9),
-        c: this.o(v, 'color', '255,255,230'),
+        c: this.o(v, 'color', '192,192,192'),
         n: this.o(v, 'count', 200)
       }
     },
@@ -101,8 +119,8 @@ export default {
       this.ctx1.rotate(0)
       // 比例
       this.ctx1.scale(1, 1)
-      this.ctx1.fillStyle = 'rgba(' + this.s.c + ')'
-      this.ctx1.strokeStyle = 'rgba(' + this.s.c + ')'
+      this.ctx1.fillStyle = 'rgba(255,255,255)'
+      this.ctx1.strokeStyle = 'rgba(255,255,255)'
       this.ctx1.beginPath()
       this.ctx1.arc(0, 0, radius, 0, Math.PI * 2, false)
       this.ctx1.closePath()
@@ -177,6 +195,11 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+  .margin-bottom-20 {
+    margin-bottom: 20px;
+  }
+  .test .el-input-group__prepend {
+    padding: 0 14px
+  }
 </style>

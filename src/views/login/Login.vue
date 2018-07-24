@@ -1,32 +1,32 @@
 <template>
   <div id="Login">
     <div
-      style="width: 22%; height: 52%; left:0; top:0; right:0; bottom: 0; margin: auto;position: absolute; background-color: #FFF;border-radius: 5px; opacity: 0.95 ">
+      style="width: 27em; height: 21em; left:0; top:0; right:0; bottom: 0; margin: auto;position: absolute; background-color: #FFF;border-radius: 5px; opacity: 0.95 ">
       <header
         style="text-align: center; font-weight: bold; font-size: 18px; letter-spacing: 1px; padding: 5% 0; border-bottom: 1px solid gainsboro;">
         XXXXXXXXXXX项目管理平台
       </header>
       <section>
-        <form style="padding: 20px 20px;" class="test">
-          <div class="margin-bottom-20">
-            <el-input placeholder="请输入用户名">
+        <el-form style="padding: 20px 20px;" class="test" :model="ruleForm" :rules="rules" ref="ruleForm">
+          <el-form-item prop="ename">
+            <el-input placeholder="请输入用户名" v-model="ruleForm.ename">
               <template slot="prepend"><i class="fa fa-user-circle-o"></i></template>
             </el-input>
-          </div>
-          <div class="margin-bottom-20">
-            <el-input placeholder="请输入密码">
+          </el-form-item>
+          <el-form-item prop="pwd">
+            <el-input placeholder="请输入密码" v-model="ruleForm.pwd">
               <template slot="prepend"><i class="fa fa-keyboard-o"></i></template>
             </el-input>
-          </div>
-          <div class="margin-bottom-20">
-            <el-input placeholder="请输入验证码">
+          </el-form-item>
+          <el-form-item prop="valicode">
+            <el-input placeholder="请输入验证码" v-model="ruleForm.valicode">
               <template slot="prepend"><i class="fa fa-key"></i></template>
             </el-input>
-          </div>
-          <div class="margin-bottom-20">
-            <el-button type="primary" style="width: 100%;">登录</el-button>
-          </div>
-        </form>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" style="width: 100%;" @click="submitForm('ruleForm')">登录</el-button>
+          </el-form-item>
+        </el-form>
       </section>
     </div>
   </div>
@@ -35,6 +35,24 @@
 <script>
 export default {
   name: 'login',
+  data () {
+    // 自定义校验规则
+    let checkEname = (rule, value, callback) => {
+      setTimeout(() => {
+        if (value.match(/^[0-9]*$/) === null) {
+          callback(new Error('用户名只能输入数字'))
+        } else {
+          callback()
+        }
+      }, 100)
+    }
+    return {
+      ruleForm: {ename: '', pwd: '', valicode: ''},
+      rules: {
+        ename: [{required: true, message: '请输入用户名', trigger: 'blur'}, {validator: checkEname, trigger: 'blur'}]
+      }
+    }
+  },
   created () {
     this.r = 0
     this.n = 0
@@ -91,6 +109,16 @@ export default {
     setTimeout(() => { this.b() }, 100)
   },
   methods: {
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit')
+        } else {
+          console.log('error commit!')
+          return false
+        }
+      })
+    },
     o (w, v, i) {
       return w.getAttribute(v) || i
     },
@@ -196,9 +224,7 @@ export default {
 </script>
 
 <style>
-  .margin-bottom-20 {
-    margin-bottom: 20px;
-  }
+  /* 样式修改 */
   .test .el-input-group__prepend {
     padding: 0 14px
   }

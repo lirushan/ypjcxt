@@ -1,5 +1,5 @@
 <template>
-  <div id="Login">
+  <div>
     <div
       style="width: 27em; height: 21em; left:0; top:0; right:0; bottom: 0; margin: auto;position: absolute; background-color: #FFF;border-radius: 5px; opacity: 0.95 ">
       <header
@@ -39,8 +39,8 @@ export default {
     // 自定义校验规则
     let checkEname = (rule, value, callback) => {
       setTimeout(() => {
-        if (value.match(/^[0-9]*$/) === null) {
-          callback(new Error('用户名只能输入数字'))
+        if (value.length > 15) {
+          callback(new Error('用户名字符长度过长'))
         } else {
           callback()
         }
@@ -159,7 +159,6 @@ export default {
     k () {
       this.r = this.u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
       this.n = this.u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-      console.log(this.r)
     },
     // 业务逻辑
     b () {

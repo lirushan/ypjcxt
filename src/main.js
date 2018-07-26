@@ -13,7 +13,8 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  el: '#login',
+  // 路由
   router,
   components: { Login },
   template: '<Login/>'

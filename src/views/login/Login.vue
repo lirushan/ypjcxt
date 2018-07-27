@@ -112,7 +112,12 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit')
+          this.$router.push({
+            name: 'index'
+          })
+          this.j('canvas')[0].remove()
+          this.j('body')[0].style.backgroundColor = 'white'
+          // alert('submit')
         } else {
           console.log('error commit!')
           return false

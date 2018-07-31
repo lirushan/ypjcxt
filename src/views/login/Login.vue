@@ -113,7 +113,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$router.push({
-            name: 'index'
+            name: 'win_server'
           })
           this.j('canvas')[0].remove()
           this.j('body')[0].style.backgroundColor = 'white'
